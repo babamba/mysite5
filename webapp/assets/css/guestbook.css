@@ -1,0 +1,95 @@
+@CHARSET "UTF-8";
+@import "mysite.css";
+
+body{
+	font-family: '맑은 고딕' 돋움; 
+}
+
+
+#guestbook h1{
+		background:url('/mysite5/asset/images/guest.png')
+		font-size:1.8em;
+		text-align:left;
+		padding:2px 2px 15px 2px;
+		color:#080808;
+		
+}
+.delete{
+		font-family:Sans-serif;
+		color:#F3F3F3;
+		margin:0px;
+		padding:4px 4px 4px 4px;
+		font-align:center;
+		background-color:#101010;
+		border:0px;
+	
+}
+
+#guestbook	{ margin:20px auto;	width:540px; }
+
+#guestbook form, 
+#guestbook table	{ width:100%;
+					  border:1px normal #333;
+					  border-collapse:collapse;
+					  cellspacing:0;
+					  cellpadding:10px;
+					  border-left-width:0;
+					  border-right-width:0;
+					  
+					}
+					
+#guestbook tr td 
+input[name="name"], input[name="pass"]  {
+	padding: 0px;
+	width: 522px;
+	border:0px;
+	margin:2px;
+}
+
+#guestbook tr td 
+input[name="submit"] {
+		color:#F3F3F3;
+		border-collapse:collapse;
+		margin:0px;
+		padding:10px;
+		font-align:center;
+		background-color:#101010;
+		border:0px;
+		
+}
+#guestbook table tr td span{
+							font-size:1.6em;
+							color:#4D4D4D;  
+							font-weight: bold;
+							
+							}
+							
+
+#guestbook table td { width:1px; margin:2px; border:1px solid #CBCBCB;
+					
+					}
+
+
+
+
+#guestbook table tr td{ padding:6px; margin:1px;}
+
+
+#guestbook ul li	{ width:100%; margin-top:10px }
+
+#guestbook ul		{ width:100%; margin-top:20px; }
+
+
+#guestbook.delete-form	{ height:200px }
+#guestbook.delete-form form {
+	width:300px;
+	padding:10px;
+	border:1px solid #666;
+	border-radius: 10px;
+	margin:50px auto;
+}
+#guestbook.delete-form a	{ display:block; margin:20px auto; width:110px }
+
+#guestbook.delete-message p	{ padding:100px; height:50px; text-align:center }
+
+#guestbook textarea#content	{ width: 100%; border:none; height: 100px; resize: none; outline: none; font-family:"맑은 고딕"; }
