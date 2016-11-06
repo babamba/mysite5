@@ -80,9 +80,9 @@ public class UserController {
 		System.out.println(authUser);
 		
 		vo.setNo(authUser.getNo());
-		userService.updateUser(vo);
 		authUser.setName(vo.getName());
 		
+		userService.updateUser(vo);
 		return "redirect:/user/modifyform?update=success";
 	}
 	

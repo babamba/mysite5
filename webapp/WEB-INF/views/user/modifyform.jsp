@@ -14,7 +14,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="user">
-				<form id="join-form" name="joinform" method="post" action="${pageContext.request.contextPath }/user">
+				<form id="join-form" name="joinform" method="post" action="${pageContext.request.contextPath }/user/modify">
 					<input type="hidden" name="a" value="modify"/>
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="${userVo.name }">
@@ -23,7 +23,7 @@
 					<strong>${userVo.email }</strong>	
 											
 					<label class="block-label">패스워드</label>
-					<input name="password" type="password" value="${userVo.password }">
+					<input name="password" type="password" value="">
 					
 					<fieldset>
 						<legend>성별</legend>

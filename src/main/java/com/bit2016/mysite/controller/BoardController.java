@@ -51,9 +51,9 @@ public class BoardController {
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	
 	public String delete(
-			@RequestParam(value="p", required=true)Long page,
-			@RequestParam(value="no", required=true)Long no,
-			Model model){
+			@RequestParam(value="p", required=true, defaultValue="")Long page,
+			@RequestParam(value="no", required=true, defaultValue="")Long no
+			){
 		
 		boardService.delete(page,no);
 		return "redirect:/board";
