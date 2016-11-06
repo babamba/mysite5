@@ -60,6 +60,7 @@
 					</c:forEach>
 				</table>
 				<div class="pager">
+				<input type="hidden" name="a" value="view">
 					<ul>
 						<c:if test="${map.prevPage > 0 }" >
 							<li><a href="${pageContext.request.contextPath }/board?p=${map.prevPage }&kwd=${map.keyword }">◀</a></li>

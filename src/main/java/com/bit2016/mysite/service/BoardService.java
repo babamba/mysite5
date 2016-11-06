@@ -25,6 +25,10 @@ public class BoardService {
 		boardDao.insert(vo);
 	}
 	
+	public void view(Long vo){
+		boardDao.get(vo);
+	}
+	
 	
 	public Map<String,Object> getList(int currentPage, String keyword){
 		//1. 페이징을 위한 기본 데이터 계산

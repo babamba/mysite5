@@ -40,6 +40,11 @@ public class BoardController {
 		return "board/write";
 	}
 	
+	@RequestMapping("/view")
+		public String view(){
+		return "board/view";
+	}
+	
 	
 	@RequestMapping( value="/write", method=RequestMethod.POST )
 	public String write( HttpSession session, @ModelAttribute BoardVo vo ) {
