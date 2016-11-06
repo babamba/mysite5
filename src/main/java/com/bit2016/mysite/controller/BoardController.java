@@ -40,7 +40,7 @@ public class BoardController {
 		return "board/write";
 	}
 	
-	@RequestMapping("/view")
+	@RequestMapping(value="/view")
 		public String view(){
 		return "board/view";
 	}
