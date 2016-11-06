@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit2016.mysite.repository.BoardVo;
+import com.bit2016.mysite.repository.GuestBookVo;
 import com.bit2016.mysite.repository.UserVo;
 import com.bit2016.mysite.service.BoardService;
+import com.bit2016.mysite.service.GuestBookService;
 
 @Controller
 @RequestMapping("/board")
@@ -43,6 +45,24 @@ public class BoardController {
 	@RequestMapping(value="/view")
 		public String view(){
 		return "board/view";
+	}
+	
+/*public String delete(@ModelAttribute GuestBookVo vo){
+		
+		guestBookService.delete(vo);
+		
+		return "redirect:/guestbook";
+		*/
+	
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	
+	public String delete(
+			@ModelAttribute("boardNo") Long boardNo,
+			@ModelAttribute("userNo") Long userNo, Model model){
+		boardService.delete(boardNo, userNo);
+		return "redirect:/board";
+		
 	}
 	
 	

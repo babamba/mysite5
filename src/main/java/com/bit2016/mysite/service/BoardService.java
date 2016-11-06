@@ -29,6 +29,9 @@ public class BoardService {
 		boardDao.get(vo);
 	}
 	
+	public void delete(Long boardNo, Long userNo){
+		boardDao.delete(boardNo, userNo);
+	}
 	
 	public Map<String,Object> getList(int currentPage, String keyword){
 		//1. 페이징을 위한 기본 데이터 계산
