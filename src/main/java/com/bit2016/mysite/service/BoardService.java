@@ -29,8 +29,8 @@ public class BoardService {
 		boardDao.get(vo);
 	}
 	
-	public void delete(Long boardNo, Long userNo){
-		boardDao.delete(boardNo, userNo);
+	public void delete(Long page, Long no){
+		boardDao.delete(page, no);
 	}
 	
 	public Map<String,Object> getList(int currentPage, String keyword){

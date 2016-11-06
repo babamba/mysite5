@@ -47,20 +47,15 @@ public class BoardController {
 		return "board/view";
 	}
 	
-/*public String delete(@ModelAttribute GuestBookVo vo){
-		
-		guestBookService.delete(vo);
-		
-		return "redirect:/guestbook";
-		*/
-	
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	
 	public String delete(
-			@ModelAttribute("boardNo") Long boardNo,
-			@ModelAttribute("userNo") Long userNo, Model model){
-		boardService.delete(boardNo, userNo);
+			@RequestParam(value="p", required=true)Long page,
+			@RequestParam(value="no", required=true)Long no,
+			Model model){
+		
+		boardService.delete(page,no);
 		return "redirect:/board";
 		
 	}
