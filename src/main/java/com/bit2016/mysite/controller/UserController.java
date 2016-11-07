@@ -5,12 +5,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bit2016.mysite.repository.UserVo;
+import com.bit2016.mysite.exception.UserDaoException;
 import com.bit2016.mysite.service.UserService;
+import com.bit2016.mysite.vo.UserVo;
 
 @Controller
 @RequestMapping("/user")
@@ -46,6 +48,7 @@ public class UserController {
 		@RequestParam(value="email", required=true, defaultValue="") String email,
 		@RequestParam(value="password", required=true, defaultValue="") String password,
 		HttpSession session){
+		
 		
 		UserVo userVo = userService.login(email, password);
 		if(userVo == null){
@@ -102,7 +105,12 @@ public class UserController {
 		return "user/modifyform";
 	}
 	
-	
+/*	@ExceptionHandler( UserDaoException.class )
+	public String handleUserDaoException() {
+		// 1.logging (파일에 내용저장)
+		// 2. 사용자에게 안내페이지
+		return "error/500";
+	}*/
 	
 	
 }

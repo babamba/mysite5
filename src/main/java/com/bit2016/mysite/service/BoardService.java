@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit2016.mysite.repository.BoardDao;
-import com.bit2016.mysite.repository.BoardVo;
+import com.bit2016.mysite.vo.BoardVo;
 
 @Service
 public class BoardService {

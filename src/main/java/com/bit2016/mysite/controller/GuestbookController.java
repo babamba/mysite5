@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bit2016.mysite.repository.GuestBookVo;
+
+
 import com.bit2016.mysite.repository.GuestbookDao;
 import com.bit2016.mysite.service.GuestBookService;
+import com.bit2016.mysite.vo.GuestBookVo;
 
 
 @Controller

@@ -1,4 +1,4 @@
-package com.bit2016.mysite.repository;
+package com.bit2016.mysite.vo;
 
 public class UserVo {
 	private Long no;

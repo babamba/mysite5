@@ -9,12 +9,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.bit2016.mysite.vo.GuestBookVo;
 
 
 @Repository
 public class GuestbookDao {
-
+	
+	@Autowired
+	private SqlSession sqlSession;
+	
+	
+	
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 		try {
@@ -28,126 +37,15 @@ public class GuestbookDao {
 	}
 	
 	public void delete(GuestBookVo vo) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = getConnection();
-			
-			String sql =
-				" delete" +
-				"   from guestbook" +
-				"  where no = ?" +
-				"    and password = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setLong( 1, vo.getNo() );
-			
-			pstmt.setString( 2, vo.getPassword() );
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if( pstmt != null ) {
-					pstmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			}
-		}
+		sqlSession.delete("guestbook.delete", vo);
 	}
 
 	public void insert(GuestBookVo vo ) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = getConnection();
-			
-			String sql =
-				" insert" +
-				"   into guestbook" +
-				" values (guestbook_seq.nextval, ?, ?, ?, sysdate)";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString( 1, vo.getName() );
-			pstmt.setString( 2, vo.getContent() );
-			pstmt.setString( 3, vo.getPassword() );
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if( pstmt != null ) {
-					pstmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			}
-		}
+		sqlSession.insert("guestbook.insert", vo);
 	}
 	
 	public List<GuestBookVo> getList() {
-		List<GuestBookVo> list = new ArrayList<GuestBookVo>();
-
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = getConnection();
-			
-			stmt = conn.createStatement();
-			
-			String sql =
-				"   select no, name, content, password, to_char(reg_date, 'yyyy-mm-dd hh:mi:ss' )" +
-				"     from guestbook" +
-				" order by reg_date desc";
-			rs = stmt.executeQuery(sql);
-			
-			while( rs.next() ) {
-				Long no = rs.getLong(1);
-				String name = rs.getString(2);
-				String content = rs.getString(3);
-				String password = rs.getString(4);
-				String date = rs.getString(5);
-				
-				GuestBookVo vo = new GuestBookVo();
-				vo.setNo(no);
-				vo.setName(name);
-				vo.setContent(content);
-				vo.setPassword(password);
-				vo.setDate(date);
-				
-				list.add( vo );
-			}
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if( rs != null ) {
-					rs.close();
-				}
-				if( stmt != null ) {
-					stmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
-			}
-		}
-
+		List<GuestBookVo> list = sqlSession.selectList("guestbook.getList");
 		return list;
 	}
 }

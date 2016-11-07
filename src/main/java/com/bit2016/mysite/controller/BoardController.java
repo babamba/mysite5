@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bit2016.mysite.repository.BoardVo;
-import com.bit2016.mysite.repository.GuestBookVo;
-import com.bit2016.mysite.repository.UserVo;
 import com.bit2016.mysite.service.BoardService;
 import com.bit2016.mysite.service.GuestBookService;
+import com.bit2016.mysite.vo.BoardVo;
+import com.bit2016.mysite.vo.UserVo;
 
 @Controller
 @RequestMapping("/board")

@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.bit2016.mysite.vo.BoardVo;
+
 @Repository
 public class BoardDao {
 	

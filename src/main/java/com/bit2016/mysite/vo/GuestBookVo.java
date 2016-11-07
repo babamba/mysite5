@@ -1,4 +1,4 @@
-package com.bit2016.mysite.repository;
+package com.bit2016.mysite.vo;
 
 import java.sql.Date;
 
