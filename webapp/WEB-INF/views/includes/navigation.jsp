@@ -10,35 +10,35 @@
 				<c:when test = "${param.menu == 'main' }">
 				<li class = "selected"><a href="${pageContext.request.contextPath}/ }">바밤바</a></li>
 				<li><a href="${pageContext.request.contextPath}/guestbook">방명록</a></li>
-				<li><a href="${pageContext.request.contextPath}/guestbook/ajax">방명록(ajax)</a></li>
+				<li><a href="${pageContext.request.contextPath}/ajaxguestbook">방명록(ajax)</a></li>
 				<li><a href="${pageContext.request.contextPath}/board">게시판</a></li>
 				</c:when>
 				
 				<c:when test = "${param.menu == 'guestbook' }">
 				<li><a href="${pageContext.request.contextPath}/">바밤바</a></li>
 				<li class = "selected"><a href="${pageContext.request.contextPath}/guestbook">방명록</a></li>
-				<li><a href="${pageContext.request.contextPath}/guestbook/ajax">방명록(ajax)</a></li>
+				<li><a href="${pageContext.request.contextPath}/ajaxguestbook">방명록(ajax)</a></li>
 				<li><a href="${pageContext.request.contextPath}/board">게시판</a></li>
 				</c:when>
 				
 				<c:when test = "${param.menu == 'guestbook-ajax' }">
 				<li><a href="${pageContext.request.contextPath}/">바밤바</a></li>
 				<li><a href="${pageContext.request.contextPath}/guestbook">방명록</a></li>
-				<li class = "selected"><a href="${pageContext.request.contextPath}/guestbook/ajax">방명록(ajax)</a></li>
+				<li class = "selected"><a href="${pageContext.request.contextPath}/ajaxguestbook">방명록(ajax)</a></li>
 				<li><a href="${pageContext.request.contextPath}/board">게시판</a></li>
 				</c:when>
 				
 				<c:when test = "${param.menu == 'board' }">
 				<li><a href="${pageContext.request.contextPath}/">바밤바</a></li>
 				<li><a href="${pageContext.request.contextPath}/guestbook">방명록</a></li>
-				<li><a href="${pageContext.request.contextPath}/guestbook/ajax">방명록(ajax)</a></li>
+				<li><a href="${pageContext.request.contextPath}/ajaxguestbook">방명록(ajax)</a></li>
 				<li class = "selected"><a href="${pageContext.request.contextPath}/board">게시판</a></li>
 				</c:when>
 				
 				<c:otherwise>
 				<li><a href="${pageContext.request.contextPath }">바밤바</a></li>
 				<li><a href="${pageContext.request.contextPath }/guestbook">방명록</a></li>
-				<li><a href="${pageContext.request.contextPath}/guestbook/ajax">방명록(ajax)</a></li>
+				<li><a href="${pageContext.request.contextPath}/ajaxguestbook">방명록(ajax)</a></li>
 				<li><a href="${pageContext.request.contextPath }/board">게시판</a></li>
 				</c:otherwise>
 				

@@ -46,7 +46,6 @@ public class BoardController {
 		return "board/view";
 	}
 	
-	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	
 	public String delete(
@@ -58,7 +57,6 @@ public class BoardController {
 		return "redirect:/board";
 		
 	}
-	
 	
 	@RequestMapping( value="/write", method=RequestMethod.POST )
 	public String write( HttpSession session, @ModelAttribute BoardVo vo ) {

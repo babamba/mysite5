@@ -13,7 +13,6 @@
 	from guestbook 
 	order by reg_date desc
 	]]>
-	
 	</select>
 	
 	<insert id="insert" parameterType="com.bit2016.mysite.vo.UserVo">
