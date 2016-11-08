@@ -40,6 +40,7 @@ public class GuestbookDao {
 
 	public Long insert(GuestBookVo vo ) {
 		sqlSession.insert("guestbook.insert", vo);
+		System.out.println(vo);
 		return vo.getNo();
 	}
 	

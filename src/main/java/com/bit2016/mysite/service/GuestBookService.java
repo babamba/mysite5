@@ -36,7 +36,7 @@ public class GuestBookService {
 		if(fetch){
 			guestbookvo = GuestBookDao.get(no);
 		}
-		
+		System.out.println(no);
 		return guestbookvo;
 	}
 	

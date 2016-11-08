@@ -187,8 +187,8 @@ $(function(){
 			dataType: "json",
 			data: "name=" + name + 
 				  "&password=" + password + 
-			  	  "&content=" + content,
-			success: function( response ){ 
+				  "&content=" + content,
+			success: function( response ) { 
 				if( response.result != "success" ) {
 					console.error( response.message );
 					return;
@@ -252,7 +252,7 @@ $(function(){
 			</div>						
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp">
-			<c:param name="menu" value="guestbook/api"/>
+			<c:param name="menu" value="guestbook-ajax"/>
 		</c:import>
 		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
