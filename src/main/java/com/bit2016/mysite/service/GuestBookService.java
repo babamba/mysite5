@@ -19,12 +19,32 @@ public class GuestBookService {
 		return GuestBookDao.getList();
 	}
 	
-	public void delete(GuestBookVo vo){
-		GuestBookDao.delete(vo);
+	public List<GuestBookVo> getList(int page){
+		return GuestBookDao.getList(page);
 	}
 	
-	public void insert(GuestBookVo vo){
-		GuestBookDao.insert(vo);
+	public boolean delete(GuestBookVo vo){
+		int result = GuestBookDao.delete(vo);
+		return (result == 1);
 	}
+	
+	public GuestBookVo write(GuestBookVo vo, boolean fetch){
+		GuestBookVo guestbookvo = null;
+
+		Long no = GuestBookDao.insert(guestbookvo);
+		
+		if(fetch){
+			guestbookvo = GuestBookDao.get(no);
+		}
+		
+		return guestbookvo;
+	}
+	
+	public GuestBookVo write(GuestBookVo vo){
+		Long no = GuestBookDao.insert(vo);
+		return vo;
+	}
+	
+	
 	
 }

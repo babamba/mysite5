@@ -49,12 +49,12 @@ public class BoardController {
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	
 	public String delete(
-			@RequestParam(value="p", required=true, defaultValue="")Long page,
-			@RequestParam(value="no", required=true, defaultValue="")Long no
+			@RequestParam(value="p", required=true, defaultValue="0")Long page,
+			@RequestParam(value="no", required=true, defaultValue="1")Long no
 			){
 		
 		boardService.delete(page,no);
-		return "redirect:/board";
+		return "redirect:/board?p=" + page + "&no=" + no;
 		
 	}
 	

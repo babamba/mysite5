@@ -7,7 +7,7 @@
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
 #dialog-delete-form p {
@@ -55,7 +55,7 @@ var render = function( vo, mode ) {
 		"<strong>" + vo.name + "</strong>" +
 		"<p>" + vo.content.replace( /\n/gi, "<br>") + "</p>" +
 		"<strong>" + vo.date + "</strong>" +
-		"<a href=''/ajaxguestbook/'" + vo.no +"'>삭제</a>" +
+		"<a href='' data-no='" + vo.no +"'>삭제</a>" +
 		"</li>";
 		
 	if( mode == true ) { // prepend
@@ -70,7 +70,7 @@ var fetchList = function() {
 	}
 	++page;
 	$.ajax({
-		url: "${pageContext.request.contextPath }/ajaxguestbook" + page,
+		url: "${pageContext.request.contextPath }/guestbook/api/list?p=" + page,
 		type: "get",
 		dataType: "json",
 		data:"",
@@ -110,7 +110,7 @@ $(function(){
 				var password = $( "#password-delete" ).val();
 				// 삭제 요청
 				$.ajax({
-					url: "${pageContext.request.contextPath }/ajaxguestbook/deleteform/" + no + "&password=" + password,
+					url: "${pageContext.request.contextPath }/guestbook/api/delete2?no=" + no + "&password=" + password,
 					type: "get",
 					dataType: "json",
 					data: "",
@@ -182,14 +182,13 @@ $(function(){
 		}
 		
 		$.ajax({
-			url: "${pageContext.request.contextPath }/api/guestbook",
+			url: "${pageContext.request.contextPath }/guestbook/api/add",
 			type: "post",
 			dataType: "json",
-			data: "a=ajax-add" +
-				  "&name=" + name + 
+			data: "name=" + name + 
 				  "&password=" + password + 
-				  "&content=" + content,
-			success: function( response ) { 
+			  	  "&content=" + content,
+			success: function( response ){ 
 				if( response.result != "success" ) {
 					console.error( response.message );
 					return;
@@ -253,7 +252,7 @@ $(function(){
 			</div>						
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp">
-			<c:param name="menu" value="guestbook-ajax"/>
+			<c:param name="menu" value="guestbook/api"/>
 		</c:import>
 		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>

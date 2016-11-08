@@ -66,14 +66,14 @@ $(function(){
 			return;
 		}
 		$.ajax({
-			url:"/mysite5/api/user?a=chkemail&email=" + email,
+			url:"/mysite5/user/api/checkemail?email=" + email,
 			type: "get",
 			dataType: "json",
 			data: "",
 			//contentType: "application/json",
 			success: function( response ) {
 				console.log( response );
-				if( response.result == "fail" ) {
+				if( response.result == "not exist" ) {
 					console.log( response.message );
 					return;
 				}

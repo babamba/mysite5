@@ -1,7 +1,9 @@
 package com.bit2016.mysite.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
@@ -10,5 +12,12 @@ public class MainController {
 	@RequestMapping("")
 	public String index(){
 		return"main/index";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/babamba")
+	public String hello(){
+		System.out.println("!!!");
+		return "안녕 jRebelㅎㅎㅎㅎㅎㅎ";
 	}
 }

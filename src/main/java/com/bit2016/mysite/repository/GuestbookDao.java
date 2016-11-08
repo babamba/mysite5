@@ -21,9 +21,7 @@ public class GuestbookDao {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	
-	
+
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 		try {
@@ -36,16 +34,30 @@ public class GuestbookDao {
 		return conn;
 	}
 	
-	public void delete(GuestBookVo vo) {
-		sqlSession.delete("guestbook.delete", vo);
+	public int delete(GuestBookVo vo) {
+		return sqlSession.delete("guestbook.delete", vo);
 	}
 
-	public void insert(GuestBookVo vo ) {
+	public Long insert(GuestBookVo vo ) {
 		sqlSession.insert("guestbook.insert", vo);
+		return vo.getNo();
 	}
 	
+
 	public List<GuestBookVo> getList() {
 		List<GuestBookVo> list = sqlSession.selectList("guestbook.getList");
 		return list;
 	}
+	
+	public List<GuestBookVo> getList(int page) {
+		List<GuestBookVo> list = sqlSession.selectList("guestbook.getListByPage", page);
+		return list;
+	}
+	
+	
+	public GuestBookVo get(Long no){
+		return sqlSession.selectOne("guestbook.getNo", no);
+		
+	}
+	
 }

@@ -44,17 +44,18 @@ public class GuestbookController {
 		guestBookService.delete(vo);
 		
 		return "redirect:/guestbook";
-		
-
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert(@ModelAttribute GuestBookVo vo){
-		guestBookService.insert(vo);;
+		guestBookService.write(vo);
 		return "redirect:/guestbook";
 		
 	}
-
 	
+	@RequestMapping("/ajax")
+	public String ajax(){
+		return "guestbook/list-ajax";
+	}
 	
 }
