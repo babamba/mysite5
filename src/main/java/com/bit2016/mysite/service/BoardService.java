@@ -21,16 +21,36 @@ public class BoardService {
 	private static final int LIST_SIZE = 5; //리스팅되는 게시물의 수
 	private static final int PAGE_SIZE = 5; //페이지 리스트의 페이지 수
 	
-	public void write(BoardVo vo){
-		boardDao.insert(vo);
+	public boolean deleteMessage( BoardVo boardVo ) {
+		return boardDao.delete(boardVo) == 1;
 	}
 	
-	public void view(Long vo){
-		boardDao.get(vo);
+	
+	public BoardVo getMessage( Long no ) {
+		BoardVo boardVo = boardDao.get( no );
+		if( boardVo != null ) {
+			boardDao.updateHit( no );
+		}
+		return boardVo;
 	}
 	
-	public void delete(Long page, Long no){
-		boardDao.delete(page, no);
+	public boolean writeMessage( BoardVo boardVo ) {
+		Integer groupNo = boardVo.getGroupNo();
+		
+		if( groupNo != null ) {
+			Integer orderNo = boardVo.getOrderNo();
+			Integer depth = boardVo.getDepth();
+			
+			boardDao.increaseGroupOrder( groupNo, orderNo );
+			boardVo.setOrderNo(orderNo + 1);
+			boardVo.setDepth(depth + 1);
+		}
+		
+		return boardDao.insert( boardVo ) == 1;
+	}
+	
+	public boolean updateMessage( BoardVo boardVo ) {
+		return boardDao.update( boardVo ) == 1;
 	}
 	
 	public Map<String,Object> getList(int currentPage, String keyword){
@@ -70,11 +90,7 @@ public class BoardService {
 				map.put( "prevPage", prevPage );
 				map.put( "nextPage", nextPage );
 				map.put( "keyword", keyword );
-				
-		
-		
-		
-		
+
 		return map;
 	}
 	

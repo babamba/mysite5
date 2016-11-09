@@ -1,18 +1,15 @@
 package com.bit2016.mysite.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bit2016.mysite.exception.UserDaoException;
 import com.bit2016.mysite.service.UserService;
 import com.bit2016.mysite.vo.UserVo;
+import com.bit2016.security.Auth;
+import com.bit2016.security.AuthUser;
 
 @Controller
 @RequestMapping("/user")
@@ -42,7 +39,7 @@ public class UserController {
 	}
 	
 	
-	//로그인
+	/*//로그인  //인터셉터로 변경
 	@RequestMapping("/login")
 	public String login(
 		@RequestParam(value="email", required=true, defaultValue="") String email,
@@ -57,29 +54,30 @@ public class UserController {
 		//인증 성공
 		session.setAttribute("authUser", userVo);
 		return "redirect:/";
-	}
+	}*/
 	
 	@RequestMapping("/loginform")
 	public String loginForm(){
 		return "user/loginform";
 	}
 	
-	@RequestMapping("/logout")
+/*	@RequestMapping("/logout")
 	public String loginout(HttpSession session){
 		
 		session.removeAttribute("authUser");
 		session.invalidate();
 		
 		return "redirect:/";
-	}
+	}*/
 	
+	@Auth
 	@RequestMapping("/modify")
-	public String modify(HttpSession session, @ModelAttribute UserVo vo){
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
+	public String modify(@AuthUser UserVo authUser, @ModelAttribute UserVo vo){
+		/*UserVo authUser = (UserVo)session.getAttribute("authUser");
 		if(authUser == null){
 			return "redirect:/user/loginform";
 		}
-		
+		*/
 		System.out.println(authUser);
 		
 		vo.setNo(authUser.getNo());
@@ -89,17 +87,18 @@ public class UserController {
 		return "redirect:/user/modifyform?update=success";
 	}
 	
+	@Auth
 	@RequestMapping("/modifyform")
-		public String modifyForm(HttpSession session, Model model){
+		public String modifyForm(@AuthUser UserVo authUser, Model model){
 		//public String modifyForm(@AuthUser UserVo vo , Model model){
 		
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		//접근제한
-		
-		if(authUser==null){
-			return "redirect:/user/loginform";
-		}
-		
+//		UserVo authUser = (UserVo) session.getAttribute("authUser");
+//		//접근제한
+//		
+//		if(authUser==null){
+//			return "redirect:/user/loginform";
+//		}
+		System.out.println(authUser);
 		UserVo vo = userService.getUser(authUser.getNo());
 		model.addAttribute("userVo", vo);
 		return "user/modifyform";

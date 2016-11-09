@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bit2016.mysite.service.BoardService;
-import com.bit2016.mysite.service.GuestBookService;
 import com.bit2016.mysite.vo.BoardVo;
 import com.bit2016.mysite.vo.UserVo;
+import com.bit2016.security.Auth;
+import com.bit2016.security.AuthUser;
 
 @Controller
 @RequestMapping("/board")
@@ -26,6 +27,7 @@ public class BoardController {
 	
 	@RequestMapping("")
 	public String List(
+			
 		@RequestParam(value="p", required=true, defaultValue="1") Integer page,
 		@RequestParam(value="kwd", required=true, defaultValue="") String keyword,
 		Model model){
@@ -36,39 +38,112 @@ public class BoardController {
 		return "board/list"; 
 	}
 	
-	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public String write(){
-		return "board/write";
-	}
+
 	
-	@RequestMapping(value="/view")
-		public String view(){
-		return "board/view";
-	}
-	
-	@RequestMapping(value="/delete", method=RequestMethod.GET)
-	
+	@Auth
+	@RequestMapping( "/delete" )
 	public String delete(
-			@RequestParam(value="p", required=true, defaultValue="0")Long page,
-			@RequestParam(value="no", required=true, defaultValue="1")Long no
-			){
-		
-		boardService.delete(page,no);
-		return "redirect:/board?p=" + page + "&no=" + no;
-		
-	}
-	
-	@RequestMapping( value="/write", method=RequestMethod.POST )
-	public String write( HttpSession session, @ModelAttribute BoardVo vo ) {
+		@AuthUser UserVo authUser,
+		@ModelAttribute BoardVo vo,
+		@RequestParam( value="no", required=true, defaultValue ="1")Long no,
+		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
+		@RequestParam( value="kwd", required=true, defaultValue="") String keyword ){
+/*		// 권한 체크
+		/////////////////////////////////////
 		UserVo authUser = (UserVo)session.getAttribute( "authUser" );
-		// 권한 체크
 		if( authUser == null ){
 			return "redirect:/user/loginform";
 		}
-			
+		/////////////////////////////////////
+*/		
 		vo.setUserNo( authUser.getNo() );
-		boardService.write( vo );
+		boardService.deleteMessage(vo);
+		
 		return "redirect:/board";
 	}
+	
+	@Auth
+	@RequestMapping( value="/modify", method=RequestMethod.GET )
+	public String modify
+		(@AuthUser UserVo authUser,@ModelAttribute BoardVo vo,
+		@RequestParam( value="no", required=true, defaultValue="0") Long no,
+		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
+		@RequestParam( value="kwd", required=true, defaultValue="") String keyword, Model model){
+
+		BoardVo boardVo = boardService.getMessage(no);
+			
+		
+		model.addAttribute( "boardVo", boardVo );
+		model.addAttribute( "page", page );
+		model.addAttribute( "keyword", keyword );
+
+		return "board/modify";
+	}
+	
+
+	@RequestMapping("/view")
+		public String view(
+			@RequestParam(value="no", required=true, defaultValue="0")Long no,
+			@RequestParam(value="p", required=true, defaultValue="1")Integer page,
+			@RequestParam(value="kwd", required=true, defaultValue="")String keyword,
+			Model model
+				){
+		
+			BoardVo boardVo = boardService.getMessage(no);
+			
+			model.addAttribute("board", boardVo);
+			model.addAttribute("page", page);
+			model.addAttribute("keyword", keyword);
+		
+		return "board/view";
+	}
+	
+	
+	@Auth
+	@RequestMapping( value="/write", method=RequestMethod.POST )
+	public String write(
+			@AuthUser UserVo authUser, @ModelAttribute BoardVo vo,
+			@RequestParam(value="p", required=true, defaultValue="1") Integer page,
+			@RequestParam(value="kwd", required=true, defaultValue="") String keyword) {
+		
+		
+		vo.setUserNo(authUser.getNo());
+		boardService.writeMessage(vo);
+		return "redirect:/board";
+	}
+	
+	@RequestMapping( value="/reply", method=RequestMethod.POST )
+	public String reply(
+		HttpSession session,
+		@RequestParam( value="no", required=true, defaultValue="0") Long no,
+		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
+		@RequestParam( value="kwd", required=true, defaultValue="") String keyword,
+		Model model ){
+		// 권한 체크
+		/////////////////////////////////////
+		UserVo authUser = (UserVo)session.getAttribute( "authUser" );
+		if( authUser == null ){
+			return "redirect:/user/loginform";
+		}
+		/////////////////////////////////////
+			
+		BoardVo boardVo = boardService.getMessage(no);
+			
+		model.addAttribute( "boardVo", boardVo );
+		model.addAttribute( "page", page );
+		model.addAttribute( "keyword", keyword );
+
+		return "board/reply";
+	}
+	
+	@Auth
+	@RequestMapping( value="/write", method=RequestMethod.GET)
+	public String write() {
+		
+		return "board/write";
+	}
+	
+
+	
 	
 }

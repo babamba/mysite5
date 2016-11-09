@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
+
 import com.bit2016.mysite.repository.GuestbookDao;
 import com.bit2016.mysite.service.GuestBookService;
 import com.bit2016.mysite.vo.GuestBookVo;
+import com.bit2016.security.Auth;
 
 
 @Controller
@@ -32,6 +34,7 @@ public class GuestbookController {
 		return "guestbook/list";
 	}
 	
+	@Auth
 	@RequestMapping("/deleteform/{no}")
 	public String deleteform(@PathVariable("no") Long no, Model model){
 		model.addAttribute("no", no);

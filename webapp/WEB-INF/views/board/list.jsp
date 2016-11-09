@@ -34,12 +34,12 @@
 								<c:when test="${vo.depth > 0 }">
 									<td class="left" style="padding-left:${20*vo.depth }px">
 										<img src="${pageContext.request.contextPath }/assets/images/reply.png">
-										<a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }&p=${map.currentPage }&kwd=${map.keyword }">${vo.title }</a>
+										<a href="${pageContext.request.contextPath }/board/view&no=${vo.no }&p=${map.currentPage }&kwd=${map.keyword }">${vo.title }</a>
 									</td>
 								</c:when>
 								<c:otherwise>
 									<td class="left">
-										<a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }&p=${map.currentPage }&kwd=${map.keyword }">${vo.title }</a>
+										<a href="${pageContext.request.contextPath }/board/view&no=${vo.no }&p=${map.currentPage }&kwd=${map.keyword }">${vo.title }</a>
 									</td>
 								</c:otherwise>
 							</c:choose>
@@ -49,7 +49,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${not empty authUser && authUser.no == vo.userNo }">
-										<a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no }&p=${map.currentPage }&kwd=${map.keyword }" class="del">삭제</a>
+										<a href="${pageContext.request.contextPath }/board/delete&no=${vo.no }&p=${map.currentPage }&kwd=${map.keyword }" class="del">삭제</a>
 									</c:when>
 									<c:otherwise>
 										&nbsp;
