@@ -44,18 +44,12 @@
 					<c:set var="count" value="${fn:length(list)}" />
 					<c:forEach items="${list }" var="vo" varStatus="status">
 						<li>
-							<table width=510 border=1>
-								<tr>
-								<td> <span>${vo.name }</span></td>
-								<tr>
-									<td colspan=4>${fn:replace(vo.content, newLine, "<br>")}</td>
-								</tr>
-								<tr>
-									<td align=right>
-										<a class="delete" href="${pageContext.request.contextPath}/guestbook/deleteform/${vo.no}">삭제</a>
-									</td>
-								</tr>
-							</table> <br>
+							<strong>${vo.name }</strong>
+							<p>
+								${fn:replace(vo.content, newLine, "<br>" ) }
+							</p>
+							<strong>${vo.date }</strong>
+							<a href="${pageContext.request.contextPath }/guestbook/deleteform/${vo.no }" title="삭제">삭제</a>
 						</li>
 					</c:forEach>
 				</ul>

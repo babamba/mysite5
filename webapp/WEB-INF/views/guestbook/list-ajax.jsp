@@ -110,7 +110,7 @@ $(function(){
 				var password = $( "#password-delete" ).val();
 				// 삭제 요청
 				$.ajax({
-					url: "${pageContext.request.contextPath }/guestbook/api/delete2?no=" + no + "&password=" + password,
+					url: "${pageContext.request.contextPath }/guestbook/api/delete?no=" + no + "&password=" + password,
 					type: "get",
 					dataType: "json",
 					data: "",

@@ -24,6 +24,7 @@ public class guestbookController {
 	@Autowired
 	private GuestBookService guestbookService;
 	
+
 	@ResponseBody
 	@RequestMapping("/list")
 	public Object list(
@@ -51,17 +52,21 @@ public class guestbookController {
 		
 	}
 	
-/*	public Object delete(
+	
+	@RequestMapping(value="/delete")
+	public Object delete(
 			@ModelAttribute GuestBookVo vo){
 	
 		boolean result = guestbookService.delete(vo);
 		
+		
+		System.out.println("delete controller");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", "succuess");
-		map.put("data",	"result -1");
+		map.put("data",	result ? vo.getNo() : -1);
 
 		return map;
-	}*/
+	}
 	
 	
 	

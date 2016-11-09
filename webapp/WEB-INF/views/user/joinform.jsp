@@ -16,7 +16,6 @@
 <script type="text/javascript">
 $(function(){
 	$( "#join-form" ).submit( function(){
-		return true;
 		//1. 이름 체크
 		if( $( "#name" ).val() == "" ) {
 			$( "#dialog p" ).text( "이름은 필수 입력 항목입니다." );
@@ -66,14 +65,14 @@ $(function(){
 			return;
 		}
 		$.ajax({
-			url:"/mysite5/user/api/checkemail?email=" + email,
+			url:"${pageContext.request.contextPath }/user/api/checkemail?email=" + email,
 			type: "get",
 			dataType: "json",
 			data: "",
 			//contentType: "application/json",
 			success: function( response ) {
 				console.log( response );
-				if( response.result == "not exist" ) {
+				if( response.result == "fail" ) {
 					console.log( response.message );
 					return;
 				}
@@ -102,9 +101,7 @@ $(function(){
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="user">
-				<form id="join-form" name="joinform" method="post" 
-				action="${pageContext.request.contextPath }/user/join">
-					<input type="hidden" name="a" value="join"/>
+				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/join">
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="">
 

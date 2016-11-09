@@ -24,6 +24,7 @@ public class GuestBookService {
 	}
 	
 	public boolean delete(GuestBookVo vo){
+		System.out.println("delete service");
 		int result = GuestBookDao.delete(vo);
 		return (result == 1);
 	}
@@ -31,7 +32,7 @@ public class GuestBookService {
 	public GuestBookVo write(GuestBookVo vo, boolean fetch){
 		GuestBookVo guestbookvo = null;
 
-		Long no = GuestBookDao.insert(guestbookvo);
+		Long no = GuestBookDao.insert(vo);
 		
 		if(fetch){
 			guestbookvo = GuestBookDao.get(no);

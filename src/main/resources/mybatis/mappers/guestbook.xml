@@ -18,7 +18,7 @@
 		   password, 
 		   to_char(reg_date, 'yyyy-mm-dd hh:mi:ss' ) as regDate
 	from guestbook 
-	order by reg_date desc
+	order by regDate desc
 	]]>
 	</select>
 	
@@ -40,9 +40,10 @@
 	
 	<delete id="delete" parameterType="guestbookvo">
 		<![CDATA[
-			delete from guestbook 
-			where no = #{no} and password = #{password}
-		]]>
+		delete
+		  from guestbook
+	     where no = #{no } and password = #{password }
+		]]>	
 	</delete>
 	
 		

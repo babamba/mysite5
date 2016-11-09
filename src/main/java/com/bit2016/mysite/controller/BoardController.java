@@ -45,34 +45,26 @@ public class BoardController {
 	public String delete(
 		@AuthUser UserVo authUser,
 		@ModelAttribute BoardVo vo,
-		@RequestParam( value="no", required=true, defaultValue ="1")Long no,
 		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
 		@RequestParam( value="kwd", required=true, defaultValue="") String keyword ){
-/*		// 권한 체크
-		/////////////////////////////////////
-		UserVo authUser = (UserVo)session.getAttribute( "authUser" );
-		if( authUser == null ){
-			return "redirect:/user/loginform";
-		}
-		/////////////////////////////////////
-*/		
-		vo.setUserNo( authUser.getNo() );
-		boardService.deleteMessage(vo);
 		
-		return "redirect:/board";
+		vo.setUserNo( authUser.getNo() );
+		boardService.deleteMessage( vo );
+		
+		return 
+			"redirect:/board";
 	}
 	
 	@Auth
 	@RequestMapping( value="/modify", method=RequestMethod.GET )
-	public String modify
-		(@AuthUser UserVo authUser,@ModelAttribute BoardVo vo,
+	public String modify(
 		@RequestParam( value="no", required=true, defaultValue="0") Long no,
 		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
-		@RequestParam( value="kwd", required=true, defaultValue="") String keyword, Model model){
-
+		@RequestParam( value="kwd", required=true, defaultValue="") String keyword,
+		Model model ){
+			
 		BoardVo boardVo = boardService.getMessage(no);
 			
-		
 		model.addAttribute( "boardVo", boardVo );
 		model.addAttribute( "page", page );
 		model.addAttribute( "keyword", keyword );
@@ -80,21 +72,34 @@ public class BoardController {
 		return "board/modify";
 	}
 	
+	@Auth
+	@RequestMapping( value="/modify", method=RequestMethod.POST )
+	public String modify(
+		@AuthUser UserVo authUser,	
+		@ModelAttribute BoardVo boardVo,
+		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
+		@RequestParam( value="kwd", required=true, defaultValue="") String keyword ){
+		
+		boardVo.setUserNo( authUser.getNo() );
+		boardService.updateMessage(boardVo);
+		
+		return 
+			"redirect:/board/view";
+	}
 
-	@RequestMapping("/view")
-		public String view(
-			@RequestParam(value="no", required=true, defaultValue="0")Long no,
-			@RequestParam(value="p", required=true, defaultValue="1")Integer page,
-			@RequestParam(value="kwd", required=true, defaultValue="")String keyword,
-			Model model
-				){
+	@RequestMapping( "/view" )
+	public String view(
+		@RequestParam( value="no", required=true, defaultValue="0") Long no,
+		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
+		@RequestParam( value="kwd", required=true, defaultValue="") String keyword,
+		Model model ){
 		
-			BoardVo boardVo = boardService.getMessage(no);
-			
-			model.addAttribute("board", boardVo);
-			model.addAttribute("page", page);
-			model.addAttribute("keyword", keyword);
+		BoardVo boardVo = boardService.getMessage(no);
 		
+		model.addAttribute( "boardVo", boardVo );
+		model.addAttribute( "page", page );
+		model.addAttribute( "keyword", keyword );
+
 		return "board/view";
 	}
 	
@@ -102,17 +107,20 @@ public class BoardController {
 	@Auth
 	@RequestMapping( value="/write", method=RequestMethod.POST )
 	public String write(
-			@AuthUser UserVo authUser, @ModelAttribute BoardVo vo,
-			@RequestParam(value="p", required=true, defaultValue="1") Integer page,
-			@RequestParam(value="kwd", required=true, defaultValue="") String keyword) {
+		@AuthUser UserVo authUser, 
+		@ModelAttribute BoardVo vo,
+		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
+		@RequestParam( value="kwd", required=true, defaultValue="") String keyword ){
+
+		vo.setUserNo( authUser.getNo() );
+		boardService.writeMessage( vo );
 		
-		
-		vo.setUserNo(authUser.getNo());
-		boardService.writeMessage(vo);
-		return "redirect:/board";
+		return
+			"redirect:/board";
 	}
 	
-	@RequestMapping( value="/reply", method=RequestMethod.POST )
+	@Auth
+	@RequestMapping( value="/reply", method=RequestMethod.GET )
 	public String reply(
 		HttpSession session,
 		@RequestParam( value="no", required=true, defaultValue="0") Long no,
@@ -121,10 +129,10 @@ public class BoardController {
 		Model model ){
 		// 권한 체크
 		/////////////////////////////////////
-		UserVo authUser = (UserVo)session.getAttribute( "authUser" );
+		/*UserVo authUser = (UserVo)session.getAttribute( "authUser" );
 		if( authUser == null ){
 			return "redirect:/user/loginform";
-		}
+		}*/
 		/////////////////////////////////////
 			
 		BoardVo boardVo = boardService.getMessage(no);
@@ -137,7 +145,7 @@ public class BoardController {
 	}
 	
 	@Auth
-	@RequestMapping( value="/write", method=RequestMethod.GET)
+	@RequestMapping( value="/write", method=RequestMethod.GET )
 	public String write() {
 		
 		return "board/write";

@@ -26,13 +26,14 @@ public class BoardService {
 	}
 	
 	
-	public BoardVo getMessage( Long no ) {
-		BoardVo boardVo = boardDao.get( no );
-		if( boardVo != null ) {
-			boardDao.updateHit( no );
-		}
-		return boardVo;
-	}
+	public BoardVo getMessage( Long no ) { 
+		   BoardVo boardVo = boardDao.get( no ); 
+				if( boardVo != null ) { 
+					boardDao.updateHit( no ); 
+				} 
+		 		return boardVo; 
+		 	} 
+
 	
 	public boolean writeMessage( BoardVo boardVo ) {
 		Integer groupNo = boardVo.getGroupNo();

@@ -22,19 +22,9 @@ public class GuestbookDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	private Connection getConnection() throws SQLException {
-		Connection conn = null;
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패 :" + e);
-		}
-		return conn;
-	}
 	
 	public int delete(GuestBookVo vo) {
+		System.out.println("delete dao");
 		return sqlSession.delete("guestbook.delete", vo);
 	}
 
