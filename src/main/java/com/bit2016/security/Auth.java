@@ -11,7 +11,8 @@ import java.lang.annotation.Target;
 public @interface Auth {
 	String role() default("user");
 //	boolean required() default false;
-
+//	boolean required() default false;
+//	String defaultValue() default "";
 	
 	
 }
