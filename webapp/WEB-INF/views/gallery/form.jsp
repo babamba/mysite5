@@ -18,7 +18,11 @@
 					<h1>갤러리</h1>
 					<a href="${pageContext.request.contextPath }/gallery" id="upload-image">리스트 가기</a>
 				</div>
-				<form>
+				<form method="post" action="upload" enctype="multipart/form-data">
+					<label>파일1:</label>
+					<input type="file" name="file">
+					<br><br>
+					<input type="submit" value="upload">
 				</form>
 			</div>
 		</div>

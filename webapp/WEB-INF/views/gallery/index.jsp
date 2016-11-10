@@ -8,7 +8,10 @@
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+<link href="${pageContext.request.contextPath }/assets/css/lightbox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/assets/css/gallery.css" rel="stylesheet" type="text/css">
+<script src="${pageContext.request.contextPath }/assets/js/lightbox.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -21,10 +24,12 @@
 				</div>
 				<ul>
 					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im1.jpg')">&nbsp;</a>
+						<a href="${pageContext.request.contextPath }/assets/gallery/im1.jpg" 
+						   data-lightbox="image-1" data-title="gallery" 
+						   style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im1.jpg')">&nbsp;</a>
 					</li>	
 					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im2.jpg')">im2.jpg</a>
+						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im2.jpg')">${vo.orgFileName}</a>
 					</li>	
 					<li>
 						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im3.jpg')">im3.jpg</a>
