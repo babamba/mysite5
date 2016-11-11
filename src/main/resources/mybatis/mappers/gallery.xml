@@ -36,7 +36,7 @@
 						 #{comments},
 						 #{file_extname},
 						 #{file_size},
-						 #{sysdate},
+						 sysdate,
 						 #{users_no});
  		]]>	
  	</insert>

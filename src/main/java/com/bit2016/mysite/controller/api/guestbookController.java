@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bit2016.dto.JSONResult;
 import com.bit2016.mysite.service.GuestBookService;
 import com.bit2016.mysite.vo.GuestBookVo;
 
@@ -27,45 +28,33 @@ public class guestbookController {
 
 	@ResponseBody
 	@RequestMapping("/list")
-	public Object list(
+	public JSONResult list(
 			@RequestParam(value="p", required=true, defaultValue="1") Integer page){
 		
 			List<GuestBookVo> list = guestbookService.getList(page);
-			
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("result", "success");
-			map.put("data", list);
 
-			return map;
+			return JSONResult.success(list);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public Map<String, Object> add(@ModelAttribute GuestBookVo vo){
+	public JSONResult add(@ModelAttribute GuestBookVo vo){
 		GuestBookVo guestBookVo = guestbookService.write(vo, true);
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("result", "success");
-		map.put("data", guestBookVo);
-		System.out.println(map);
-		return map;
+		return JSONResult.success(guestBookVo);
 		
 	}
 	
 	
 	@RequestMapping(value="/delete")
-	public Object delete(
+	public JSONResult delete(
 			@ModelAttribute GuestBookVo vo){
 	
 		boolean result = guestbookService.delete(vo);
 		
-		
-		System.out.println("delete controller");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("result", "succuess");
-		map.put("data",	result ? vo.getNo() : -1);
+	
 
-		return map;
+		return JSONResult.success(result ? vo.getNo() : -1);
 	}
 	
 	
