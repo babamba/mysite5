@@ -10,6 +10,10 @@
 </head>
 <body>
 	<h1>Exception 발생</h1>
-	<p>${exceptionMessage}</p>
+<%-- 	<p>${exceptionMessage}</p> --%>
+	<p>
+	앗죄송
+	일시적인 장애 발생
+	</p>
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.bit2016.mysite.controller;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,17 +21,20 @@ import com.bit2016.mysite.vo.GalleryVo;
 @RequestMapping("/gallery")
 public class GalleryController {
 	
+	
 	@Autowired
-	private GalleryService galleryService;
-	
-	@RequestMapping("")
-	public String list(
-			
-			){
-		return "gallery/index";
+	private GalleryService galleryservice;
+
+	@RequestMapping( "" )
+	public String index( Model model ){
 		
+		List<GalleryVo> list= galleryservice.getImageList();
+		
+		model.addAttribute( "list", list );
+		model.addAttribute( "URL", GalleryService.URL );
+		
+		return "gallery/index";
 	}
-	
 	
 	@RequestMapping("/form")
 	public String form(){
@@ -43,7 +47,7 @@ public class GalleryController {
 			@RequestParam("file")MultipartFile file
 			){
 		
-		galleryService.restore(file);
+		galleryservice.restore(file);
 		
 		return "redirect:/gallery";
 	}

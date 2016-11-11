@@ -23,7 +23,7 @@ public class GalleryService {
 	private GalleryDao galleryDao;
 	
 	private static final String SAVE_PATH = "/upload";
-	private static final String URL = "/gallery/assets/";
+	public static final String URL = "/gallery/assets/";
 
 	public String restore(MultipartFile multipartFile) {
 		String url = "";
@@ -56,6 +56,10 @@ public class GalleryService {
 			throw new RuntimeException("upload file");
 		}
 		return url;
+	}
+	
+	public List<GalleryVo> getImageList() {
+		return galleryDao.getList();
 	}
 
 	private void writeFile(MultipartFile multipartFile, String saveFileName)
