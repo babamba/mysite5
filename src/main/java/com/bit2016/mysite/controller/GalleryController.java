@@ -41,13 +41,13 @@ public class GalleryController {
 		return "gallery/form";
 	}
 	
-	@RequestMapping("/upload")
+	@RequestMapping(value = "/upload", method=RequestMethod.POST)
 	public String upload(
 			@ModelAttribute GalleryVo vo,
 			@RequestParam("file")MultipartFile file
 			){
 		
-		galleryservice.restore(file);
+		galleryservice.restore(vo, file);
 		
 		return "redirect:/gallery";
 	}

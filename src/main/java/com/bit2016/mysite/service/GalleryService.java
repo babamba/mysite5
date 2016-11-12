@@ -25,7 +25,7 @@ public class GalleryService {
 	private static final String SAVE_PATH = "/upload";
 	public static final String URL = "/gallery/assets/";
 
-	public String restore(MultipartFile multipartFile) {
+	public String restore(GalleryVo vo, MultipartFile multipartFile) {
 		String url = "";
 		try {
 
