@@ -32,7 +32,7 @@ public class GalleryController {
 		
 		model.addAttribute( "list", list );
 		model.addAttribute( "URL", GalleryService.URL );
-		
+		System.out.println("@@@@@@@@@@@@@@@@list :" + list);
 		return "gallery/index";
 	}
 	
@@ -41,13 +41,23 @@ public class GalleryController {
 		return "gallery/form";
 	}
 	
-	@RequestMapping(value = "/upload", method=RequestMethod.POST)
-	public String upload(
-			@ModelAttribute GalleryVo vo,
-			@RequestParam("file")MultipartFile file
+	@RequestMapping("/view")
+	public String view(
+			@RequestParam(value="no", required=true, defaultValue="0")Long no
 			){
+		System.out.println("1");
 		
-		galleryservice.restore(vo, file);
+		return"";
+		
+	}
+	
+	
+	@RequestMapping( value="/upload", method=RequestMethod.POST )
+	public String upload(
+		@ModelAttribute GalleryVo galleryVo,
+		@RequestParam( "file" ) MultipartFile multipartFile ){
+		
+		galleryservice.restore( galleryVo, multipartFile );
 		
 		return "redirect:/gallery";
 	}

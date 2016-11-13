@@ -8,10 +8,7 @@
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
-<link href="${pageContext.request.contextPath }/assets/css/lightbox.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/assets/css/gallery.css" rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath }/assets/js/lightbox.js"></script>
 </head>
 <body>
 	<div id="container">
@@ -19,61 +16,18 @@
 		<div id="content">
 			<div id="gallery">
 				<div>
-					<h1>갤러리</h1>
-					<a href="${pageContext.request.contextPath }/gallery/form" id="upload-image">이미지 올리기</a>
+					<h2>GALLERY</h2>
+					<a href="${pageContext.request.contextPath }/gallery/form" id="upload-image">
+					<img src="${pageContext.request.contextPath }/assets/images/gallery.png" width=auto/>
+					</a>
 				</div>
 				<ul>
+					<c:forEach items="${list  }" var="vo">
 					<li>
-						<a href="${pageContext.request.contextPath }/assets/gallery/im1.jpg" 
-						   data-lightbox="image-1" data-title="gallery" 
-						   style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im1.jpg')">&nbsp;</a>
+						<a href="${pageContext.request.contextPath }/gallery/view?no=${vo.no }" data-lightbox="roadtrip" style="background-image:url('${pageContext.request.contextPath }${url }/${vo.saveFileName }')"> </a>
 					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im2.jpg')">${vo.orgFileName}</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im3.jpg')">im3.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im4.jpg')">im4.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im5.jpg')">im5.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im6.jpg')">im6.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im7.jpg')">im7.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im8.jpg')">im8.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im9.jpg')">im9.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im10.jpg')">im10.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im11.jpg')">im11.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im12.jpg')">im12.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im13.jpg')">im13.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im14.jpg')">im14.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/im15.jpg')">im15.jpg</a>
-					</li>	
-					<li>
-						<a href="" style="background-image:url('${pageContext.request.contextPath }/assets/gallery/imp1.png')">imp1.png</a>
-					</li>	
-				</ul>	
+				</c:forEach>	
+				</ul>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp">

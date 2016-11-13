@@ -11,62 +11,59 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bit2016.mysite.exception.GalleryUploadException;
 import com.bit2016.mysite.repository.GalleryDao;
 import com.bit2016.mysite.vo.GalleryVo;
 
 
 @Service
 public class GalleryService {
-
+	private static final String SAVE_PATH = "/upload";
+	public static final String URL = "/gallery/assets/";
 	
 	@Autowired
 	private GalleryDao galleryDao;
 	
-	private static final String SAVE_PATH = "/upload";
-	public static final String URL = "/gallery/assets/";
 
-	public String restore(GalleryVo vo, MultipartFile multipartFile) {
-		String url = "";
-		try {
-
-			System.out.println("@@@@@@@@@@@@@@@"+multipartFile);
-			if (multipartFile.isEmpty() == true) {
-				return url;
-			}
-
-			String originalFileName = multipartFile.getOriginalFilename();
-			String extName = originalFileName.substring(
-					originalFileName.lastIndexOf('.') + 1,
-					originalFileName.length());
-			String saveFileName = generateSaveFileName(extName);
-			Long filesize = multipartFile.getSize();
-
-			System.out.println("########" + originalFileName);
-			System.out.println("########" + extName);
-			System.out.println("########" + saveFileName);
-			System.out.println("########" + filesize);
-
-			writeFile(multipartFile, saveFileName);
-
-			url = URL + saveFileName;
-
-		} catch (IOException ex) {
-			// throw new UploadFileException("write file");
-			// log 남기기
-			throw new RuntimeException("upload file");
-		}
-		return url;
-	}
-	
 	public List<GalleryVo> getImageList() {
 		return galleryDao.getList();
 	}
 
-	private void writeFile(MultipartFile multipartFile, String saveFileName)
-			throws IOException {
+	public void restore( GalleryVo galleryVo, MultipartFile multipartFile )
+			throws GalleryUploadException {
+		try {
+			if (multipartFile.isEmpty() == true) {
+				throw new GalleryUploadException( "MultipartFile is Empty" );
+			}
+
+			String orgFileName = multipartFile.getOriginalFilename();
+			String fileExtName = orgFileName.substring( orgFileName.lastIndexOf('.') + 1, orgFileName.length() );
+			String saveFileName = generateSaveFileName( fileExtName );
+			Long fileSize = multipartFile.getSize();
+
+			// 파일 저장
+			writeFile(multipartFile, saveFileName);
+
+			// DB에 저장
+			galleryVo.setOrgFileName(orgFileName);
+			galleryVo.setSaveFileName(saveFileName);
+			galleryVo.setFileExtName(fileExtName);
+			galleryVo.setFileSize(fileSize);
+
+			galleryDao.insert(galleryVo);
+			
+		} catch (IOException ex) {
+			//1.log 남기기
+			
+			//2.runtime exception 전환 
+			throw new GalleryUploadException( "save file uploded" );
+		}
+	}
+	
+	
+	private void writeFile(MultipartFile multipartFile, String saveFileName) throws IOException {
 		byte[] fileData = multipartFile.getBytes();
-		FileOutputStream fos = new FileOutputStream(SAVE_PATH + "/"
-				+ saveFileName);
+		FileOutputStream fos = new FileOutputStream(SAVE_PATH + "/" + saveFileName);
 		fos.write(fileData);
 		fos.close();
 	}

@@ -16,15 +16,15 @@ public class GalleryDao {
 	
 	
 	public List<GalleryVo> getList(){
-		List<GalleryVo> list = sqlSession.selectList("gallery.getList");
-		return list;
+		return sqlSession.selectList("gallery.getList");
 	}
 	
-	public void insert(GalleryVo vo){
-		sqlSession.insert("gallery.insert", vo);
+	public GalleryVo view(Long no){
+		return sqlSession.selectOne("gallery.view",no);
 	}
 	
-	
-	
+	public int insert(GalleryVo vo){
+		return sqlSession.insert("gallery.insert", vo);
+	}
 	
 }
