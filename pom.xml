@@ -239,8 +239,7 @@
 					<password>tomcat</password>
 				</configuration>
 			</plugin>
-			
-			
+		
 		</plugins>
 	</build>
 </project>
