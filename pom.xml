@@ -235,8 +235,8 @@
 				<configuration>
 					<url>http://127.0.0.1:8888/manager/text</url>
 					<path>/mysite5</path>
-					<username>tomcat</username>
-					<password>tomcat</password>
+					<username>ROTFL</username>
+					<password>ROTFL</password>
 				</configuration>
 			</plugin>
 			
