@@ -17,9 +17,10 @@
 				<form id="login-form" name="loginform" method="post" 
 				action="${pageContext.request.contextPath }/user/login">
 					<input type="hidden" name="a" value="login"/>
+					
 					<label class="block-label" for="email">이메일</label>
 					<input id="email" name="email" type="text" value="">
-					<label class="block-label" >패스워드</label>
+					
 					<input name="password" type="password" value="">
 					<c:if test="${'fail' == param.result }">
 					<p>

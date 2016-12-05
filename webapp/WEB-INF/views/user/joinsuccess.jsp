@@ -10,6 +10,8 @@
 <link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="center-content">
+	<h1 class="logo">JBlog</h1>
 	<div id="container">
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
@@ -24,5 +26,6 @@
 		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
 		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
+</div>
 </body>
 </html>

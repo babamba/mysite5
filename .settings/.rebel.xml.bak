@@ -4,6 +4,8 @@
 	<classpath>
 		<dir name="D:/bit2016/mysite5/target/classes">
 		</dir>
+		<dir name="D:/bit2016/mysite5/target/test-classes">
+		</dir>
 	</classpath>
 
 	<web>

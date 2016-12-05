@@ -34,6 +34,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 			
 			// 데이터베이스에서 해당 내용에 맞는 UserVo 받아오기
 			UserVo userVo = userService.login(email, password);
+
 			
 			// 이메일과 패스워드가 일치하지 않는경우
 			if(userVo == null){
